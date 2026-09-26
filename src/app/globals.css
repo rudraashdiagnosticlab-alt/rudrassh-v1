@@ -1,26 +1,201 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* Brand palette sampled from rudraash-logo.webp */
+@theme {
+  --color-brand-50: #f6f2fb;
+  --color-brand-100: #ede5f6;
+  --color-brand-200: #dac9ec;
+  --color-brand-300: #bea1dc;
+  --color-brand-400: #9d76c6;
+  --color-brand-500: #7c4a9d; /* logo purple */
+  --color-brand-600: #663e98; /* logo violet */
+  --color-brand-700: #53328a;
+  --color-brand-800: #3c2e80; /* logo indigo */
+  --color-brand-900: #2a215c;
+  --color-brand-950: #170f35;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  --color-magenta-50: #fdf0f7;
+  --color-magenta-100: #fbd9eb;
+  --color-magenta-200: #fbc4df;
+  --color-magenta-300: #f68cc1; /* accent on dark surfaces */
+  --color-magenta-400: #f2439a;
+  --color-magenta-500: #ed067b; /* logo pink */
+  --color-magenta-600: #ce158b; /* logo magenta */
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  --color-ink-50: #f8f7fb;
+  --color-ink-100: #f1f0f5;
+  --color-ink-200: #e4e2ea;
+  --color-ink-300: #c9c7d1;
+  --color-ink-400: #9a97a6;
+  --color-ink-500: #6b6878;
+  --color-ink-600: #4d4a5a;
+  --color-ink-700: #373536; /* logo charcoal */
+  --color-ink-800: #2b2838;
+  --color-ink-900: #1d1a2b;
+
+  /* Premium surfaces */
+  --color-mist: #f8f6fc;
+  --color-night: #120b2e;
+
+  --shadow-soft: 0 1px 2px rgb(60 46 128 / 0.04), 0 8px 24px -10px rgb(60 46 128 / 0.14);
+  --shadow-lift: 0 2px 6px rgb(60 46 128 / 0.05), 0 28px 60px -20px rgb(60 46 128 / 0.3);
+  --shadow-glow: 0 10px 30px -10px rgb(206 21 139 / 0.55);
+  --shadow-premium: 0 1px 1px rgb(18 11 46 / 0.03), 0 4px 10px -2px rgb(18 11 46 / 0.05), 0 32px 64px -24px rgb(60 46 128 / 0.28);
+
+  --animate-float: float 7s ease-in-out infinite;
+  --animate-float-delayed: float 7s ease-in-out 1.5s infinite;
+  --animate-fade-up: fade-up 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+  --animate-ping-slow: ping 2.2s cubic-bezier(0, 0, 0.2, 1) infinite;
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: none; }
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@theme inline {
+  --font-sans: var(--font-jakarta), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-outfit), var(--font-jakarta), ui-sans-serif, sans-serif;
+}
+
+@utility bg-cta-gradient {
+  background-image: linear-gradient(120deg, var(--color-magenta-600) 0%, #9a2a95 45%, var(--color-brand-600) 100%);
+}
+
+/* Deep indigo surface with soft brand glows, used by every dark section */
+@utility bg-night-glow {
+  background-color: var(--color-night);
+  background-image:
+    radial-gradient(60% 55% at 0% 0%, rgb(206 21 139 / 0.22), transparent 70%),
+    radial-gradient(55% 60% at 100% 100%, rgb(102 62 152 / 0.32), transparent 70%);
+}
+
+/* Signature gradient band (logo magenta through violet to indigo) */
+@utility bg-signature {
+  background-color: var(--color-brand-800);
+  background-image:
+    radial-gradient(50% 80% at 10% 0%, rgb(255 255 255 / 0.12), transparent 70%),
+    linear-gradient(120deg, var(--color-magenta-600) 0%, var(--color-brand-600) 50%, var(--color-brand-900) 100%);
+}
+
+/* Hairline gradient border; opacity via --ring-o so hover:[--ring-o:1] reveals it */
+@utility ring-gradient {
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, var(--color-magenta-500), var(--color-brand-500));
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    opacity: var(--ring-o, 0);
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+    z-index: 1;
+  }
+}
+
+/* Outlined display numerals; stroke colour via --outline-color */
+@utility text-outline {
+  color: transparent;
+  -webkit-text-stroke: 1px var(--outline-color, rgb(255 255 255 / 0.22));
+  transition: -webkit-text-stroke-color 0.3s ease;
+}
+
+@utility text-gradient {
+  background-image: linear-gradient(
+    100deg,
+    var(--color-magenta-600) 0%,
+    var(--color-brand-600) 55%,
+    var(--color-brand-800) 100%
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility text-gradient-light {
+  background-image: linear-gradient(100deg, var(--color-magenta-300) 0%, var(--color-brand-200) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bg-grid {
+  background-image:
+    linear-gradient(to right, rgb(60 46 128 / 0.06) 1px, transparent 1px),
+    linear-gradient(to bottom, rgb(60 46 128 / 0.06) 1px, transparent 1px);
+  background-size: 44px 44px;
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 6rem;
+  }
+
+  body {
+    background: #ffffff;
+    color: var(--color-ink-700);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--color-magenta-100);
+    color: var(--color-brand-900);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-magenta-600);
+    outline-offset: 3px;
+  }
+}
+
+/* Scroll-driven reveal: zero JavaScript, and content stays visible where unsupported */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: reveal-up linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+  }
+}
+
+@keyframes reveal-up {
+  from { opacity: 0; transform: translateY(28px); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* FAQ accordion marker */
+details > summary {
+  list-style: none;
+}
+details > summary::-webkit-details-marker {
+  display: none;
 }
