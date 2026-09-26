@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight, Award, CalendarCheck, CircleCheck, ClipboardList, MapPin, Microscope, Phone } from "lucide-react";
 // Placeholder photo: CDC on Unsplash (Unsplash License).
 // Replace with a photo of the Rudraash lab when available.
@@ -103,13 +104,13 @@ const actions = [
   {
     title: "Our Packages",
     text: `${packages.length} health checkup packages`,
-    href: "#packages",
+    href: "/packages",
     icon: ClipboardList,
   },
   {
     title: "Our Services",
     text: "Hematology, biochemistry, genetics & more",
-    href: "#services",
+    href: "/services",
     icon: Microscope,
   },
   {
@@ -124,12 +125,11 @@ function QuickActions() {
   return (
     <Container className="relative z-10 -mt-14 sm:-mt-16">
       <ul className="shadow-premium grid grid-cols-2 gap-px overflow-hidden rounded-3xl bg-ink-200 ring-1 ring-ink-200 xl:grid-cols-4">
-        {actions.map(({ icon: Icon, ...a }) => (
-          <li key={a.title} className="bg-white">
-            <a
-              href={a.href}
-              className="group flex h-full flex-col gap-4 p-5 transition-colors duration-300 hover:bg-mist sm:flex-row sm:items-center sm:p-6"
-            >
+        {actions.map(({ icon: Icon, ...a }) => {
+          const className =
+            "group flex h-full flex-col gap-4 p-5 transition-colors duration-300 hover:bg-mist sm:flex-row sm:items-center sm:p-6";
+          const body = (
+            <>
               <span className="group-hover:bg-cta-gradient grid size-12 shrink-0 place-items-center rounded-2xl bg-brand-50 text-brand-700 ring-1 ring-brand-100 transition duration-300 group-hover:text-white group-hover:ring-transparent">
                 <Icon className="size-6" strokeWidth={1.7} aria-hidden />
               </span>
@@ -141,9 +141,22 @@ function QuickActions() {
                 className="hidden size-4 shrink-0 text-ink-300 transition group-hover:translate-x-0.5 group-hover:text-magenta-600 sm:block"
                 aria-hidden
               />
-            </a>
-          </li>
-        ))}
+            </>
+          );
+          return (
+            <li key={a.title} className="bg-white">
+              {a.href.startsWith("/") ? (
+                <Link href={a.href} className={className}>
+                  {body}
+                </Link>
+              ) : (
+                <a href={a.href} className={className}>
+                  {body}
+                </a>
+              )}
+            </li>
+          );
+        })}
       </ul>
     </Container>
   );

@@ -1,6 +1,6 @@
 import { Mail, MapPin, Phone } from "lucide-react";
 import { Container } from "@/components/ui/Container";
-import { BookingForm } from "@/components/home/BookingForm";
+import { BookingForm } from "@/components/sections/BookingForm";
 import { BOOK_SECTION_ID } from "@/lib/booking";
 import { mailHref, site, telHref } from "@/lib/site";
 

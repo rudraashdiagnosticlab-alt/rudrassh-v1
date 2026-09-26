@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SocialIcons } from "@/components/ui/SocialIcons";
@@ -44,12 +45,12 @@ export function TopBar() {
         </div>
 
         <div className="flex items-center gap-5">
-          <p className="hidden items-center gap-2 text-white/85 lg:inline-flex">
+          <Link href="/contact-us" className="hidden items-center gap-2 text-white/85 transition hover:text-white lg:inline-flex">
             <MapPin className="size-3.5 text-white/80" aria-hidden />
             <span>
               Our labs: <span className="font-medium text-white">{site.locations.join(" · ")}</span>
             </span>
-          </p>
+          </Link>
           <span className="hidden h-4 w-px bg-white/20 lg:block" aria-hidden />
           <SocialIcons size="sm" />
         </div>

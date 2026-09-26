@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import { ArrowRight, Dna, Microscope, Phone, TestTubes } from "lucide-react";
 import mark from "@/assets/rudraash-mark.webp";
 import { Container } from "@/components/ui/Container";
@@ -56,19 +57,19 @@ export function CtaBand() {
               </p>
 
               <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:justify-center lg:justify-start">
-                <a
-                  href="#packages"
+                <Link
+                  href="/packages"
                   className="group inline-flex items-center justify-center gap-2 rounded-full bg-white px-6 py-3.5 font-semibold text-brand-800 shadow-lg shadow-brand-950/25 transition hover:bg-brand-50"
                 >
                   Explore Packages
                   <ArrowRight className="size-4 transition group-hover:translate-x-0.5" aria-hidden />
-                </a>
-                <a
-                  href="#contact"
+                </Link>
+                <Link
+                  href="/contact-us"
                   className="inline-flex items-center justify-center gap-2 rounded-full border border-white/30 bg-white/10 px-6 py-3.5 font-semibold text-white backdrop-blur transition hover:bg-white/20"
                 >
                   Contact Us
-                </a>
+                </Link>
               </div>
 
               <a

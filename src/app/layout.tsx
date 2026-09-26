@@ -1,6 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Outfit, Plus_Jakarta_Sans } from "next/font/google";
-import { site } from "@/lib/site";
+import { TopBar } from "@/components/layout/TopBar";
+import { Header } from "@/components/layout/Header";
+import { Footer } from "@/components/layout/Footer";
+import { MobileActionBar } from "@/components/layout/MobileActionBar";
+import { labs, site } from "@/lib/site";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -55,6 +59,12 @@ const jsonLd = {
   email: site.email,
   foundingDate: String(site.founded),
   areaServed: site.locations,
+  department: labs.map((lab) => ({
+    "@type": "MedicalClinic",
+    name: `${site.name}, ${lab.city}`,
+    address: lab.address,
+    telephone: lab.phones.map((p) => `+91 ${p}`),
+  })),
   medicalSpecialty: "Pathology",
   sameAs: Object.values(site.social),
 };
@@ -70,7 +80,18 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       suppressHydrationWarning
     >
       <body className="min-h-dvh" suppressHydrationWarning>
-        {children}
+        <div id="top" aria-hidden />
+        <a
+          href="#main"
+          className="sr-only z-[60] rounded-lg bg-white px-4 py-2 font-semibold text-brand-800 focus:not-sr-only focus:fixed focus:top-3 focus:left-3"
+        >
+          Skip to content
+        </a>
+        <TopBar />
+        <Header />
+        <main id="main">{children}</main>
+        <Footer />
+        <MobileActionBar />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}

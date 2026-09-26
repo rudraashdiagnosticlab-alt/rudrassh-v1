@@ -1,6 +1,6 @@
 import { CalendarCheck, MessageCircle, Phone } from "lucide-react";
+import { BookLink } from "@/components/ui/BookLink";
 import { telHref, whatsappHref } from "@/lib/site";
-import { BOOK_SECTION_ID } from "@/lib/booking";
 
 export function MobileActionBar() {
   return (
@@ -22,13 +22,10 @@ export function MobileActionBar() {
         >
           <MessageCircle className="size-5" aria-hidden />
         </a>
-        <a
-          href={`#${BOOK_SECTION_ID}`}
-          className="bg-cta-gradient flex items-center justify-center gap-2 rounded-full font-semibold text-white"
-        >
+        <BookLink className="bg-cta-gradient flex items-center justify-center gap-2 rounded-full font-semibold text-white">
           <CalendarCheck className="size-5" aria-hidden />
           Book a Test
-        </a>
+        </BookLink>
       </div>
     </div>
   );

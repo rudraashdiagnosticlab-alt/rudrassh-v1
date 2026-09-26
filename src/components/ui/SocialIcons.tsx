@@ -17,11 +17,12 @@ const labels = { facebook: "Facebook", instagram: "Instagram", youtube: "YouTube
 const sizes = {
   sm: { link: "size-7 bg-white/15 text-white hover:bg-white hover:text-magenta-600", icon: "size-3.5" },
   md: { link: "size-10 bg-white/[0.06] text-white/80 ring-1 ring-white/10 hover:bg-white hover:text-brand-700", icon: "size-[18px]" },
+  light: { link: "size-9 bg-brand-50 text-brand-700 ring-1 ring-brand-100 hover:bg-brand-800 hover:text-white hover:ring-transparent", icon: "size-4" },
 } as const;
 
 export function SocialIcons({ className = "", size = "md" }: { className?: string; size?: keyof typeof sizes }) {
   return (
-    <ul className={`flex items-center ${size === "sm" ? "gap-1.5" : "gap-2"} ${className}`}>
+    <ul className={`flex items-center ${size === "md" ? "gap-2" : "gap-1.5"} ${className}`}>
       {(Object.keys(site.social) as (keyof typeof site.social)[]).map((key) => (
         <li key={key}>
           <a

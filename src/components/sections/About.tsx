@@ -1,9 +1,9 @@
 import { ArrowRight, Phone } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
-import { about, packages, services, specialities } from "@/lib/data";
+import { BookLink } from "@/components/ui/BookLink";
+import { about, aboutMore, packages, services, specialities } from "@/lib/data";
 import { site, telHref } from "@/lib/site";
-import { BOOK_SECTION_ID } from "@/lib/booking";
 
 const figures = [
   { value: String(packages.length), label: "Health Packages" },
@@ -46,8 +46,10 @@ function HighlightPanel() {
   );
 }
 
-export function About() {
-  const [lead, ...rest] = about;
+// "Who We Are". `full` (About Us page) adds the longer paragraph from rudraash.com/about-us.
+export function About({ full = false }: { full?: boolean }) {
+  const [lead, ...others] = about;
+  const rest = full ? [...others, aboutMore] : others;
   return (
     <section id="about" className="pt-20 pb-24 lg:pt-28 lg:pb-32">
       <Container className="grid gap-12 lg:grid-cols-12 lg:gap-16">
@@ -83,13 +85,12 @@ export function About() {
             </ul>
 
             <div className="mt-10 flex flex-wrap items-center gap-x-6 gap-y-4 border-t border-ink-100 pt-8">
-              <a
-                href={`#${BOOK_SECTION_ID}`}
+              <BookLink
                 className="bg-cta-gradient shadow-glow group inline-flex items-center gap-2 rounded-full px-6 py-3.5 font-semibold text-white transition hover:brightness-110"
               >
                 Book Appointment
                 <ArrowRight className="size-4 transition group-hover:translate-x-0.5" aria-hidden />
-              </a>
+              </BookLink>
               <a
                 href={telHref}
                 className="group inline-flex items-center gap-3 text-sm text-ink-500 transition hover:text-brand-800"

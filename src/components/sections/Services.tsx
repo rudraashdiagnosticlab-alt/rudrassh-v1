@@ -1,36 +1,15 @@
-import {
-  ArrowRight,
-  Activity,
-  Bug,
-  Dna,
-  Droplets,
-  FlaskConical,
-  Flower2,
-  Microscope,
-  ShieldPlus,
-  TestTubes,
-  type LucideIcon,
-} from "lucide-react";
+import Link from "next/link";
+import { ArrowRight } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { BookButton } from "@/components/ui/BookButton";
+import { iconFor, serviceIcons } from "@/components/ui/icons";
 import { moreServices, services } from "@/lib/data";
 
-const icons: Record<string, LucideIcon> = {
-  Allergy: Flower2,
-  Hematology: Droplets,
-  Biochemistry: FlaskConical,
-  "Clinical Pathology": TestTubes,
-  "Hormones / Endocrinology": Activity,
-  "Serology / Infectious Diseases": ShieldPlus,
-  "Histopathology / Oncopathology": Microscope,
-  "Microbiology & Molecular Biology": Bug,
-  "Genetic Studies": Dna,
-};
-
-export function Services() {
+// Service cards. On the home page `showAllLink` adds a link to the full Services page.
+export function Services({ showAllLink = false, tinted = false }: { showAllLink?: boolean; tinted?: boolean }) {
   return (
-    <section id="services" className="py-24 lg:py-32">
+    <section id="services" className={`py-24 lg:py-32 ${tinted ? "bg-mist" : ""}`}>
       <Container>
         <SectionHeading
           eyebrow="Why Choose Us"
@@ -42,12 +21,13 @@ export function Services() {
         />
 
         <ul className="mt-14 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {services.map(({ name, description }, i) => {
-            const Icon = icons[name] ?? FlaskConical;
+          {services.map(({ slug, name, description }, i) => {
+            const Icon = iconFor(serviceIcons, slug);
             return (
               <li
-                key={name}
-                className="reveal group ring-gradient shadow-soft hover:shadow-premium flex flex-col rounded-3xl border border-ink-200/60 bg-white p-7 transition duration-300 hover:-translate-y-1 hover:border-transparent hover:[--ring-o:1]"
+                key={slug}
+                id={slug}
+                className="reveal group ring-gradient shadow-soft hover:shadow-premium flex scroll-mt-28 flex-col rounded-3xl border border-ink-200/60 bg-white p-7 transition duration-300 target:[--ring-o:1] hover:-translate-y-1 hover:border-transparent hover:[--ring-o:1]"
               >
                 <div className="flex items-start justify-between">
                   <span className="group-hover:bg-cta-gradient grid size-14 place-items-center rounded-2xl bg-brand-50 text-brand-700 ring-1 ring-brand-100 transition duration-300 group-hover:text-white group-hover:ring-transparent">
@@ -81,6 +61,18 @@ export function Services() {
             </span>
           ))}
         </p>
+
+        {showAllLink && (
+          <div className="mt-8 text-center">
+            <Link
+              href="/services"
+              className="shadow-soft group inline-flex items-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-semibold text-ink-800 ring-1 ring-ink-200/70 transition hover:text-brand-700 hover:ring-brand-300"
+            >
+              Explore all services
+              <ArrowRight className="size-4 transition group-hover:translate-x-0.5" aria-hidden />
+            </Link>
+          </div>
+        )}
       </Container>
     </section>
   );
