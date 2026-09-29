@@ -8,13 +8,14 @@ import { VisionMission } from "@/components/sections/VisionMission";
 import { LabCards } from "@/components/sections/LabCards";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { academy } from "@/lib/data";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "About Us",
   description:
     "Rudraash Diagnostics & Labs is a state-of-the-art medical diagnostics facility started in 2021 at Dindigul and expanded to Trichy and Thanjavur, offering pathology, microbiology, molecular biology and genetic studies.",
-  alternates: { canonical: "/about-us" },
-};
+  path: "/about-us",
+});
 
 export default function AboutPage() {
   return (

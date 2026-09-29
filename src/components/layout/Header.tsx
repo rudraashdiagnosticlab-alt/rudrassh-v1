@@ -19,7 +19,7 @@ type MenuDef = {
   text: string;
   href: string;
   cta: string;
-  note?: string;
+  extras?: { name: string; href: string }[];
   items: { label: string; href: string; slug: string }[];
 };
 
@@ -30,8 +30,8 @@ const menus: Record<MenuKey, MenuDef> = {
     text: "Accurate and reliable medical testing across our centers in Trichy, Dindigul and Thanjavur.",
     href: "/services",
     cta: "View all services",
-    note: `Also available: ${moreServices.join(" · ")}`,
-    items: services.map((s) => ({ label: s.name, href: `/services#${s.slug}`, slug: s.slug })),
+    extras: moreServices,
+    items: services.map((s) => ({ label: s.name, href: `/services/${s.slug}`, slug: s.slug })),
   },
   packages: {
     eyebrow: "Our Lab Packages",
@@ -39,7 +39,7 @@ const menus: Record<MenuKey, MenuDef> = {
     text: "Thoughtfully designed diagnostic packages to support preventive healthcare and early disease detection.",
     href: "/packages",
     cta: `View all ${packages.length} packages`,
-    items: packages.map((p) => ({ label: p.name, href: `/packages#${p.slug}`, slug: p.slug })),
+    items: packages.map((p) => ({ label: p.name, href: `/packages/${p.slug}`, slug: p.slug })),
   },
 };
 
@@ -47,6 +47,7 @@ const iconMaps: Record<MenuKey, typeof serviceIcons> = { services: serviceIcons,
 
 function MegaPanel({ id, menuKey, onNavigate }: { id: string; menuKey: MenuKey; onNavigate: () => void }) {
   const m = menus[menuKey];
+  const extras = m.extras ?? [];
   return (
     <div id={id} className="animate-menu-in absolute inset-x-0 top-full hidden pt-3 lg:block">
       <Container>
@@ -85,7 +86,19 @@ function MegaPanel({ id, menuKey, onNavigate }: { id: string; menuKey: MenuKey; 
                 );
               })}
             </ul>
-            {m.note && <p className="mt-3 border-t border-ink-100 px-3 pt-4 pb-1 text-xs text-ink-500">{m.note}</p>}
+            {extras.length > 0 && (
+              <p className="mt-3 border-t border-ink-100 px-3 pt-4 pb-1 text-xs text-ink-500">
+                Also available:{" "}
+                {extras.map((x, i) => (
+                  <span key={x.href}>
+                    <Link href={x.href} onClick={onNavigate} className="font-semibold text-ink-700 transition hover:text-magenta-600">
+                      {x.name}
+                    </Link>
+                    {i < extras.length - 1 && <span className="mx-1.5 text-ink-300">·</span>}
+                  </span>
+                ))}
+              </p>
+            )}
           </div>
         </div>
       </Container>
@@ -161,7 +174,7 @@ export function Header() {
                     <Link
                       href={item.href}
                       onClick={closeAll}
-                      aria-current={active ? "page" : undefined}
+                      aria-current={pathname === item.href ? "page" : active ? "true" : undefined}
                       className={`${text} rounded-full px-3.5 py-2 xl:px-4`}
                     >
                       {item.label}
@@ -181,7 +194,7 @@ export function Header() {
                       <Link
                         href={item.href}
                         onClick={closeAll}
-                        aria-current={active ? "page" : undefined}
+                        aria-current={pathname === item.href ? "page" : active ? "true" : undefined}
                         className={`${text} py-2 pr-0.5 pl-3.5 xl:pl-4`}
                       >
                         {item.label}
@@ -286,6 +299,18 @@ function MobileNav({
                             className="block rounded-lg px-3 py-2 text-[15px] text-ink-600 transition hover:bg-mist hover:text-brand-800"
                           >
                             {sub.label}
+                          </Link>
+                        </li>
+                      ))}
+                      {/* Sections of the last service (Genetic Studies), indented under it. */}
+                      {menus[item.menu].extras?.map((x) => (
+                        <li key={x.href}>
+                          <Link
+                            href={x.href}
+                            onClick={onNavigate}
+                            className="block rounded-lg py-1.5 pr-3 pl-7 text-sm text-ink-500 transition hover:bg-mist hover:text-brand-800"
+                          >
+                            {x.name}
                           </Link>
                         </li>
                       ))}

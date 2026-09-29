@@ -7,13 +7,14 @@ import { BookingSection } from "@/components/sections/BookingSection";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { servicesIntro } from "@/lib/data";
 import { site } from "@/lib/site";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Services",
   description:
     "Hematology, biochemistry, clinical pathology, hormones, serology, histopathology, microbiology, molecular biology and genetic studies at Rudraash labs in Trichy, Dindigul and Thanjavur.",
-  alternates: { canonical: "/services" },
-};
+  path: "/services",
+});
 
 export default function ServicesPage() {
   return (

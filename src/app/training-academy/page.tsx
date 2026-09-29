@@ -7,13 +7,14 @@ import { TagList } from "@/components/ui/TagList";
 import { SplitIntro } from "@/components/sections/SplitIntro";
 import { AcademyForm } from "@/components/sections/AcademyForm";
 import { academy } from "@/lib/data";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Training Academy",
   description:
     "Rudraash Training Academy, approved by Bharathidasan University – IECD, offers short-term courses, certificate and diploma programs, internships, research collaboration and dissertation guidance.",
-  alternates: { canonical: "/training-academy" },
-};
+  path: "/training-academy",
+});
 
 const stepIcons = [UserPlus, ClipboardCheck, Award];
 

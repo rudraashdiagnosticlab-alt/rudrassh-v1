@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, CircleCheck } from "lucide-react";
 import { packages } from "@/lib/data";
-import { BOOK_EVENT } from "@/lib/booking";
+import { BOOK_EVENT, type BookingRequest } from "@/lib/booking";
 import { site, whatsappHref } from "@/lib/site";
 
 const OTHERS = "Others";
@@ -23,16 +23,23 @@ export function BookingForm() {
   const [errors, setErrors] = useState<Errors>({});
   const [sent, setSent] = useState(false);
   const nameRef = useRef<HTMLInputElement>(null);
+  // The message text filled in by the last "Book" click, so the next click can replace it.
+  const autoMessage = useRef("");
 
   useEffect(() => {
     const onBook = (e: Event) => {
-      const item = (e as CustomEvent<string>).detail;
-      if (packageNames.includes(item)) {
-        setPkg(item);
-      } else {
-        setPkg(OTHERS);
-        setMessage(`Enquiry: ${item}`);
-      }
+      const { item, note } = (e as CustomEvent<BookingRequest>).detail;
+      const isPackage = packageNames.includes(item);
+      const filled = isPackage ? (note ?? "") : [`Enquiry: ${item}`, note].filter(Boolean).join("\n");
+      const previous = autoMessage.current;
+      autoMessage.current = filled;
+
+      setPkg(isPackage ? item : OTHERS);
+      // Swap out the previous click's text but keep anything the visitor typed themselves.
+      setMessage((current) => {
+        const own = (current.startsWith(previous) ? current.slice(previous.length) : current).trim();
+        return [filled, own].filter(Boolean).join("\n");
+      });
       setSent(false);
       nameRef.current?.focus({ preventScroll: true });
     };

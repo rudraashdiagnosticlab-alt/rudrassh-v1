@@ -5,6 +5,13 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { BookButton } from "@/components/ui/BookButton";
 import { iconFor, serviceIcons } from "@/components/ui/icons";
 import { moreServices, services } from "@/lib/data";
+import { countTests, serviceDetails } from "@/lib/services";
+
+const testLabel = (slug: string) => {
+  const detail = serviceDetails[slug];
+  const n = detail ? countTests(detail) : 0;
+  return n > 0 ? `View ${n} tests` : "View details";
+};
 
 // Service cards. On the home page `showAllLink` adds a link to the full Services page.
 export function Services({ showAllLink = false, tinted = false }: { showAllLink?: boolean; tinted?: boolean }) {
@@ -37,14 +44,28 @@ export function Services({ showAllLink = false, tinted = false }: { showAllLink?
                     {String(i + 1).padStart(2, "0")}
                   </span>
                 </div>
-                <h3 className="font-display mt-6 text-lg font-semibold text-ink-900">{name}</h3>
+                <h3 className="font-display mt-6 text-lg font-semibold text-ink-900">
+                  {/* Out of the tab order: the "View tests" link below goes to the same page. */}
+                  <Link href={`/services/${slug}`} tabIndex={-1} className="transition hover:text-brand-700">
+                    {name}
+                  </Link>
+                </h3>
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-500">{description}</p>
-                <div className="mt-6 border-t border-ink-100 pt-5">
-                  <BookButton
-                    item={name}
+                <div className="mt-6 flex items-center justify-between gap-4 border-t border-ink-100 pt-5">
+                  <Link
+                    href={`/services/${slug}`}
                     className="inline-flex items-center gap-1.5 text-sm font-semibold text-brand-700 transition hover:text-magenta-600"
                   >
-                    Enquire now <ArrowRight className="size-4 transition group-hover:translate-x-0.5" aria-hidden />
+                    {testLabel(slug)}
+                    <span className="sr-only"> for {name}</span>
+                    <ArrowRight className="size-4 transition group-hover:translate-x-0.5" aria-hidden />
+                  </Link>
+                  <BookButton
+                    item={name}
+                    label={`Enquire about ${name}`}
+                    className="text-sm font-semibold text-ink-500 transition hover:text-magenta-600"
+                  >
+                    Enquire
                   </BookButton>
                 </div>
               </li>
@@ -55,8 +76,10 @@ export function Services({ showAllLink = false, tinted = false }: { showAllLink?
         <p className="reveal mt-10 text-center text-sm text-ink-500">
           Also available:{" "}
           {moreServices.map((s, i) => (
-            <span key={s}>
-              <span className="font-semibold text-ink-700">{s}</span>
+            <span key={s.name}>
+              <Link href={s.href} className="font-semibold text-ink-700 underline decoration-brand-200 underline-offset-4 transition hover:text-magenta-600 hover:decoration-magenta-300">
+                {s.name}
+              </Link>
               {i < moreServices.length - 1 && <span className="mx-2 text-ink-300">·</span>}
             </span>
           ))}

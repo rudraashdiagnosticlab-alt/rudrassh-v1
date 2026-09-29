@@ -6,13 +6,14 @@ import { SocialIcons } from "@/components/ui/SocialIcons";
 import { LabFinder } from "@/components/sections/LabFinder";
 import { BookingSection } from "@/components/sections/BookingSection";
 import { mailHref, site, telHref } from "@/lib/site";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Contact Us",
   description:
     "Addresses, home collection numbers and hours for Rudraash Diagnostics & Labs in Trichy, Dindigul and Thanjavur, plus online appointment booking.",
-  alternates: { canonical: "/contact-us" },
-};
+  path: "/contact-us",
+});
 
 export default function ContactPage() {
   return (

@@ -6,12 +6,13 @@ import { Packages } from "@/components/sections/Packages";
 import { BookingSection } from "@/components/sections/BookingSection";
 import { CtaBand } from "@/components/sections/CtaBand";
 import { packages, packagesIntro } from "@/lib/data";
+import { pageMetadata } from "@/lib/metadata";
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
   title: "Health Packages",
   description: `${packages.length} diagnostic packages including diabetes, cardiac, thyroid, vitamin, fertility, PCOS, antenatal and master health check-ups at Rudraash Diagnostics & Labs.`,
-  alternates: { canonical: "/packages" },
-};
+  path: "/packages",
+});
 
 export default function PackagesPage() {
   return (

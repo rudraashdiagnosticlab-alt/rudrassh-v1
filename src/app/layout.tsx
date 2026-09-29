@@ -5,6 +5,7 @@ import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { MobileActionBar } from "@/components/layout/MobileActionBar";
 import { labs, site } from "@/lib/site";
+import { sharedOpenGraph, siteUrl } from "@/lib/metadata";
 import "./globals.css";
 
 const outfit = Outfit({
@@ -19,7 +20,7 @@ const jakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000"),
+  metadataBase: new URL(siteUrl),
   title: {
     default: `Health Checkup Packages | ${site.name}`,
     template: `%s | ${site.name}`,
@@ -38,11 +39,9 @@ export const metadata: Metadata = {
     "Rudraash",
   ],
   openGraph: {
-    type: "website",
-    siteName: site.name,
+    ...sharedOpenGraph,
     title: `${site.name} | ${site.tagline}`,
     description: site.description,
-    images: [{ url: "/rudraash-logo.webp", width: 703, height: 199, alt: site.legalName }],
   },
 };
 

@@ -56,7 +56,12 @@ export const services: Service[] = [
   },
 ];
 
-export const moreServices = ["Gestational Marker Studies", "Karyotyping", "Sequencing Services"];
+// Covered on the Genetic Studies page; the anchors match the old site's menu links.
+export const moreServices = [
+  { name: "Gestational Marker Studies", href: "/services/genetic-studies#gsm" },
+  { name: "Karyotyping", href: "/services/genetic-studies#karyotyping" },
+  { name: "Sequencing Services", href: "/services/genetic-studies#sequencing" },
+];
 
 export type HealthPackage = { slug: string; name: string; description: string };
 

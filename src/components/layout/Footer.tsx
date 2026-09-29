@@ -82,7 +82,7 @@ export function Footer() {
             <ul className="mt-5 grid gap-x-8 gap-y-3 text-sm sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-2">
               {services.map((s) => (
                 <li key={s.slug}>
-                  <Link href={`/services#${s.slug}`} className="group inline-flex items-start gap-1.5 transition hover:text-white">
+                  <Link href={`/services/${s.slug}`} className="group inline-flex items-start gap-1.5 transition hover:text-white">
                     <ChevronRight
                       className="mt-[3px] size-3.5 shrink-0 text-brand-200/40 transition group-hover:translate-x-0.5 group-hover:text-magenta-300"
                       aria-hidden

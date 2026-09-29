@@ -5,12 +5,16 @@ import { Container } from "@/components/ui/Container";
 // Dark banner at the top of every inner page.
 export function PageHero({
   crumb,
+  parents = [],
+  icon,
   title,
   highlight,
   description,
   children,
 }: {
   crumb: string;
+  parents?: { label: string; href: string }[];
+  icon?: React.ReactNode;
   title: string;
   highlight?: string;
   description?: string;
@@ -42,6 +46,14 @@ export function PageHero({
                 Home
               </Link>
             </li>
+            {parents.map((p) => (
+              <li key={p.href} className="flex items-center gap-2">
+                <ChevronRight className="size-3.5" aria-hidden />
+                <Link href={p.href} className="transition hover:text-white">
+                  {p.label}
+                </Link>
+              </li>
+            ))}
             <li aria-hidden>
               <ChevronRight className="size-3.5" />
             </li>
@@ -51,6 +63,11 @@ export function PageHero({
           </ol>
         </nav>
 
+        {icon && (
+          <span className="bg-cta-gradient shadow-glow mt-8 grid size-16 place-items-center rounded-2xl text-white">
+            {icon}
+          </span>
+        )}
         <h1 className="font-display mt-6 max-w-3xl text-4xl leading-[1.08] font-semibold tracking-[-0.02em] text-balance text-white sm:text-5xl lg:text-[3.5rem]">
           {title}
           {highlight && (

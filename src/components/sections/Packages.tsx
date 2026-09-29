@@ -5,6 +5,12 @@ import { SectionHeading } from "@/components/ui/SectionHeading";
 import { BookButton } from "@/components/ui/BookButton";
 import { iconFor, packageIcons } from "@/components/ui/icons";
 import { packages } from "@/lib/data";
+import { packageDetails, packageTestRange } from "@/lib/packages";
+
+const detailLabel = (slug: string) => {
+  const detail = packageDetails[slug];
+  return detail ? `View ${packageTestRange(detail)} tests` : "View details";
+};
 
 // Package cards. With `limit` (home page) it shows the first few and links to the full Packages page.
 export function Packages({ limit }: { limit?: number }) {
@@ -34,14 +40,27 @@ export function Packages({ limit }: { limit?: number }) {
                 <span className="group-hover:bg-cta-gradient grid size-12 place-items-center rounded-2xl bg-brand-50 text-brand-700 ring-1 ring-brand-100 transition duration-300 group-hover:text-white group-hover:ring-transparent">
                   <Icon className="size-6" strokeWidth={1.7} aria-hidden />
                 </span>
-                <h3 className="font-display mt-5 text-lg leading-snug font-semibold text-ink-900">{name}</h3>
+                <h3 className="font-display mt-5 text-lg leading-snug font-semibold text-ink-900">
+                  {/* Out of the tab order: the "View tests" link below goes to the same page. */}
+                  <Link href={`/packages/${slug}`} tabIndex={-1} className="transition hover:text-brand-700">
+                    {name}
+                  </Link>
+                </h3>
                 <p className="mt-2 flex-1 text-sm leading-relaxed text-ink-500">{description}</p>
+                <Link
+                  href={`/packages/${slug}`}
+                  className="mt-5 inline-flex w-fit items-center gap-1.5 text-sm font-semibold text-brand-700 transition hover:text-magenta-600"
+                >
+                  {detailLabel(slug)}
+                  <span className="sr-only"> for {name}</span>
+                  <ArrowRight className="size-4" aria-hidden />
+                </Link>
                 <BookButton
                   item={name}
-                  label={`Book ${name}`}
-                  className="group-hover:bg-night mt-6 inline-flex w-full items-center justify-center gap-1.5 rounded-full bg-brand-50 px-4 py-2.5 text-sm font-semibold text-brand-800 transition group-hover:text-white"
+                  className="group-hover:bg-night mt-4 inline-flex w-full items-center justify-center gap-1.5 rounded-full bg-brand-50 px-4 py-2.5 text-sm font-semibold text-brand-800 transition group-hover:text-white"
                 >
                   <Plus className="size-4" aria-hidden /> Book Now
+                  <span className="sr-only">: {name}</span>
                 </BookButton>
               </li>
             );

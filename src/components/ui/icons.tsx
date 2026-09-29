@@ -1,3 +1,4 @@
+import { createElement } from "react";
 import {
   Activity,
   Baby,
@@ -56,3 +57,12 @@ export const packageIcons: Record<string, LucideIcon> = {
 };
 
 export const iconFor = (map: Record<string, LucideIcon>, slug: string) => map[slug] ?? FlaskConical;
+
+// Renders the icon for a slug, for places that pick an icon outside a .map() callback.
+export function SlugIcon({
+  map,
+  slug,
+  ...props
+}: { map: Record<string, LucideIcon>; slug: string } & React.ComponentProps<LucideIcon>) {
+  return createElement(iconFor(map, slug), props);
+}
