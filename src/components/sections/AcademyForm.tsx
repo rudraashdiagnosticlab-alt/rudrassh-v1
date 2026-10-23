@@ -3,11 +3,12 @@
 import { useState } from "react";
 import { ArrowRight, CircleCheck } from "lucide-react";
 import { academy } from "@/lib/data";
-import { whatsappHref } from "@/lib/site";
+import { sendEnquiry } from "@/lib/enquiry";
+import { labWhatsapp, site, whatsappHref } from "@/lib/site";
 
-type Errors = Partial<Record<"name" | "phone" | "email" | "purpose", string>>;
+type Errors = Partial<Record<"name" | "phone" | "email" | "location" | "purpose", string>>;
 
-// Training Academy enquiry form. Like the booking form, it hands the details to WhatsApp.
+// Training Academy enquiry form. Like the booking form, it emails the details to the lab and hands them to the chosen lab's WhatsApp.
 export function AcademyForm() {
   const [errors, setErrors] = useState<Errors>({});
   const [sent, setSent] = useState(false);
@@ -18,6 +19,7 @@ export function AcademyForm() {
     const name = String(data.get("name") ?? "").trim();
     const phone = String(data.get("phone") ?? "").replace(/\D/g, "").slice(-10);
     const email = String(data.get("email") ?? "").trim();
+    const location = String(data.get("location") ?? "");
     const purpose = String(data.get("purpose") ?? "");
     const message = String(data.get("message") ?? "").trim();
 
@@ -25,22 +27,26 @@ export function AcademyForm() {
     if (name.length < 2) next.name = "Please enter your name";
     if (!/^[6-9]\d{9}$/.test(phone)) next.phone = "Enter a valid 10-digit mobile number";
     if (email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) next.email = "Enter a valid email address";
+    if (!location) next.location = "Choose a location";
     if (!purpose) next.purpose = "Choose a purpose";
     setErrors(next);
     if (Object.keys(next).length) return;
+
+    sendEnquiry({ form: "Training Academy enquiry", name, phone, email, location, purpose, message }).catch(() => {});
 
     const text = [
       "Hi Rudraash Training Academy, I'd like to enquire.",
       `Name: ${name}`,
       `Phone: ${phone}`,
       email && `Email: ${email}`,
+      `Location: ${location}`,
       `Purpose: ${purpose}`,
       message && `Message: ${message}`,
     ]
       .filter(Boolean)
       .join("\n");
 
-    window.open(whatsappHref(text), "_blank", "noopener,noreferrer");
+    window.open(whatsappHref(text, labWhatsapp(location)), "_blank", "noopener,noreferrer");
     setSent(true);
   }
 
@@ -96,6 +102,21 @@ export function AcademyForm() {
         </label>
 
         <label className={label}>
+          Choose Location
+          <select name="location" defaultValue="" className={`${field} appearance-none`} {...describe("location")}>
+            <option value="" disabled>
+              Select a lab
+            </option>
+            {site.locations.map((l) => (
+              <option key={l} value={l}>
+                {l}
+              </option>
+            ))}
+          </select>
+          {error("location")}
+        </label>
+
+        <label className={`${label} sm:col-span-2`}>
           Choose Purpose
           <select name="purpose" defaultValue="" className={`${field} appearance-none`} {...describe("purpose")}>
             <option value="" disabled>
@@ -134,7 +155,7 @@ export function AcademyForm() {
             <CircleCheck className="size-4" aria-hidden /> WhatsApp is open. Send the message and we&apos;ll get back to you.
           </span>
         ) : (
-          <span className="text-ink-400">Your details are sent to our team on WhatsApp.</span>
+          <span className="text-ink-400">Your details are sent to our team by email and WhatsApp.</span>
         )}
       </p>
     </form>

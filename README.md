@@ -41,7 +41,7 @@ URLs match the old WordPress site. A few old URLs redirect (see `next.config.ts`
 | Sections used on several pages | `src/components/sections/*` |
 | Home-only sections (banner, search) | `src/components/home/*` |
 
-All text, services, packages, testimonials, lab addresses and contact details come from the current rudraash.com pages. Two things are assumptions and should be confirmed: the WhatsApp number (the main phone number is used, since rudraash.com lists none) and the contact email (rudraashdiagnostics@gmail.com is used; the old site also shows info@rudraash.com).
+All text, services, packages, testimonials, lab addresses and contact details come from the current rudraash.com pages. One thing is an assumption and should be confirmed: the WhatsApp number (the main phone number is used, since rudraash.com lists none). The contact email is contact@rudraash.com (a Hostinger mailbox).
 
 ### Home banner photo
 

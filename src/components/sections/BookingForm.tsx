@@ -4,7 +4,8 @@ import { useEffect, useRef, useState } from "react";
 import { ArrowRight, CircleCheck } from "lucide-react";
 import { packages } from "@/lib/data";
 import { BOOK_EVENT, type BookingRequest } from "@/lib/booking";
-import { site, whatsappHref } from "@/lib/site";
+import { sendEnquiry } from "@/lib/enquiry";
+import { labWhatsapp, site, whatsappHref } from "@/lib/site";
 
 const OTHERS = "Others";
 const packageNames = packages.map((p) => p.name);
@@ -65,6 +66,9 @@ export function BookingForm() {
     setErrors(next);
     if (Object.keys(next).length) return;
 
+    // Emailed to the lab in the background; WhatsApp still opens straight away (it must, or popup blockers stop it).
+    sendEnquiry({ form: "Appointment request", name, phone, email, location, package: pkg, date, time, message }).catch(() => {});
+
     const text = [
       "Hi Rudraash, I'd like to book an appointment.",
       `Name: ${name}`,
@@ -79,7 +83,7 @@ export function BookingForm() {
       .filter(Boolean)
       .join("\n");
 
-    window.open(whatsappHref(text), "_blank", "noopener,noreferrer");
+    window.open(whatsappHref(text, labWhatsapp(location)), "_blank", "noopener,noreferrer");
     setSent(true);
   }
 
@@ -198,7 +202,7 @@ export function BookingForm() {
             <CircleCheck className="size-4" aria-hidden /> WhatsApp is open. Send the message to confirm your appointment.
           </span>
         ) : (
-          <span className="text-ink-400">Your details are sent to our team on WhatsApp.</span>
+          <span className="text-ink-400">Your details are sent to our team by email and WhatsApp.</span>
         )}
       </p>
     </form>

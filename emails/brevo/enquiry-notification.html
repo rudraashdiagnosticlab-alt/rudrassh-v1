@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="x-apple-disable-message-reformatting">
+  <meta name="color-scheme" content="light">
+  <meta name="supported-color-schemes" content="light">
+  <title>{{ params.form }} from {{ params.name }}</title>
+  <!--[if mso]>
+  <noscript><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml></noscript>
+  <![endif]-->
+  <style>
+    body { margin: 0; padding: 0; width: 100% !important; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table, td { border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+    a { color: #663E98; }
+    @media only screen and (max-width: 620px) {
+      .container { width: 100% !important; }
+      .px { padding-left: 20px !important; padding-right: 20px !important; }
+      .btn-cell { display: block !important; width: 100% !important; padding: 0 0 10px 0 !important; }
+      .btn-cell table { width: 100% !important; }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;background-color:#F1F0F5;">
+  <!-- Inbox preview text -->
+  <div style="display:none;max-height:0;overflow:hidden;opacity:0;mso-hide:all;">{{ params.name }} &middot; +91 {{ params.phone }}{% if params.location %} &middot; {{ params.location }}{% endif %}{% if params.package %} &middot; {{ params.package }}{% endif %}{% if params.purpose %} &middot; {{ params.purpose }}{% endif %}</div>
+
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#F1F0F5" style="background-color:#F1F0F5;">
+    <tr>
+      <td align="center" style="padding:32px 12px;">
+        <!--[if mso]><table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0"><tr><td><![endif]-->
+        <table role="presentation" class="container" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px;max-width:600px;">
+
+          <!-- Header -->
+          <tr>
+            <td class="px" bgcolor="#663E98" style="background-color:#663E98;background-image:linear-gradient(120deg,#CE158B 0%,#9A2A95 45%,#663E98 100%);border-radius:16px 16px 0 0;padding:28px 32px;">
+              <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:16px;letter-spacing:2px;text-transform:uppercase;color:#FBD9EB;">New website enquiry</p>
+              <h1 style="margin:8px 0 0 0;font-family:Arial,Helvetica,sans-serif;font-size:24px;line-height:30px;font-weight:bold;color:#FFFFFF;">{{ params.form }}</h1>
+            </td>
+          </tr>
+
+          <!-- Intro -->
+          <tr>
+            <td class="px" bgcolor="#FFFFFF" style="background-color:#FFFFFF;padding:28px 32px 0 32px;">
+              <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:23px;color:#373536;">
+                <strong style="color:#1D1A2B;">{{ params.name }}</strong> filled in the form on the website{% if params.submitted_at %} on {{ params.submitted_at }}{% endif %}. Please get back to them to confirm.
+              </p>
+            </td>
+          </tr>
+
+          <!-- Details -->
+          <tr>
+            <td class="px" bgcolor="#FFFFFF" style="background-color:#FFFFFF;padding:20px 32px 0 32px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #E4E2EA;">
+                <tr>
+                  <td width="130" valign="top" style="padding:12px 16px;background-color:#F8F6FC;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#6B6878;">Name</td>
+                  <td valign="top" style="padding:12px 16px;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:20px;font-weight:bold;color:#1D1A2B;">{{ params.name }}</td>
+                </tr>
+                <tr>
+                  <td width="130" valign="top" style="padding:12px 16px;border-top:1px solid #E4E2EA;background-color:#F8F6FC;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#6B6878;">Phone</td>
+                  <td valign="top" style="padding:12px 16px;border-top:1px solid #E4E2EA;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:20px;color:#1D1A2B;"><a href="tel:+91{{ params.phone }}" style="color:#663E98;text-decoration:none;font-weight:bold;">+91 {{ params.phone }}</a></td>
+                </tr>
+                {% if params.email %}
+                <tr>
+                  <td width="130" valign="top" style="padding:12px 16px;border-top:1px solid #E4E2EA;background-color:#F8F6FC;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#6B6878;">Email</td>
+                  <td valign="top" style="padding:12px 16px;border-top:1px solid #E4E2EA;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:20px;color:#1D1A2B;word-break:break-all;"><a href="mailto:{{ params.email }}" style="color:#663E98;text-decoration:none;">{{ params.email }}</a></td>
+                </tr>
+                {% endif %}
+                {% if params.location %}
+                <tr>
+                  <td width="130" valign="top" style="padding:12px 16px;border-top:1px solid #E4E2EA;background-color:#F8F6FC;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#6B6878;">Lab</td>
+                  <td valign="top" style="padding:12px 16px;border-top:1px solid #E4E2EA;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:20px;color:#1D1A2B;">{{ params.location }}</td>
+                </tr>
+                {% endif %}
+                {% if params.package %}
+                <tr>
+                  <td width="130" valign="top" style="padding:12px 16px;border-top:1px solid #E4E2EA;background-color:#F8F6FC;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#6B6878;">Package</td>
+                  <td valign="top" style="padding:12px 16px;border-top:1px solid #E4E2EA;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:20px;color:#1D1A2B;">{{ params.package }}</td>
+                </tr>
+                {% endif %}
+                {% if params.date %}
+                <tr>
+                  <td width="130" valign="top" style="padding:12px 16px;border-top:1px solid #E4E2EA;background-color:#F8F6FC;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#6B6878;">Preferred date</td>
+                  <td valign="top" style="padding:12px 16px;border-top:1px solid #E4E2EA;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:20px;color:#1D1A2B;">{{ params.date }}</td>
+                </tr>
+                {% endif %}
+                {% if params.time %}
+                <tr>
+                  <td width="130" valign="top" style="padding:12px 16px;border-top:1px solid #E4E2EA;background-color:#F8F6FC;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#6B6878;">Preferred time</td>
+                  <td valign="top" style="padding:12px 16px;border-top:1px solid #E4E2EA;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:20px;color:#1D1A2B;">{{ params.time }}</td>
+                </tr>
+                {% endif %}
+                {% if params.purpose %}
+                <tr>
+                  <td width="130" valign="top" style="padding:12px 16px;border-top:1px solid #E4E2EA;background-color:#F8F6FC;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#6B6878;">Purpose</td>
+                  <td valign="top" style="padding:12px 16px;border-top:1px solid #E4E2EA;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:20px;color:#1D1A2B;">{{ params.purpose }}</td>
+                </tr>
+                {% endif %}
+                {% if params.message %}
+                <tr>
+                  <td width="130" valign="top" style="padding:12px 16px;border-top:1px solid #E4E2EA;background-color:#F8F6FC;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#6B6878;">Message</td>
+                  <td valign="top" style="padding:12px 16px;border-top:1px solid #E4E2EA;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:22px;color:#1D1A2B;white-space:pre-line;">{{ params.message }}</td>
+                </tr>
+                {% endif %}
+              </table>
+            </td>
+          </tr>
+
+          <!-- Quick actions -->
+          <tr>
+            <td class="px" bgcolor="#FFFFFF" style="background-color:#FFFFFF;padding:24px 32px 32px 32px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td class="btn-cell" style="padding:0 10px 0 0;">
+                    <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                      <tr>
+                        <td align="center" bgcolor="#CE158B" style="border-radius:999px;mso-padding-alt:12px 24px;">
+                          <a href="tel:+91{{ params.phone }}" style="display:inline-block;padding:12px 24px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:18px;font-weight:bold;color:#FFFFFF;text-decoration:none;border-radius:999px;">Call +91 {{ params.phone }}</a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                  <td class="btn-cell" style="padding:0 10px 0 0;">
+                    <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                      <tr>
+                        <td align="center" bgcolor="#663E98" style="border-radius:999px;mso-padding-alt:12px 24px;">
+                          <a href="https://wa.me/91{{ params.phone }}" style="display:inline-block;padding:12px 24px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:18px;font-weight:bold;color:#FFFFFF;text-decoration:none;border-radius:999px;">WhatsApp</a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                  {% if params.email %}
+                  <td class="btn-cell" style="padding:0;">
+                    <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                      <tr>
+                        <td align="center" bgcolor="#FFFFFF" style="border:2px solid #663E98;border-radius:999px;mso-padding-alt:10px 22px;">
+                          <a href="mailto:{{ params.email }}" style="display:inline-block;padding:10px 22px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:18px;font-weight:bold;color:#663E98;text-decoration:none;border-radius:999px;">Email</a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                  {% endif %}
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td class="px" bgcolor="#F8F6FC" style="background-color:#F8F6FC;border-top:1px solid #E4E2EA;border-radius:0 0 16px 16px;padding:20px 32px;">
+              <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:18px;color:#6B6878;">
+                Sent automatically by the website form{% if params.page %} on <a href="{{ params.page }}" style="color:#663E98;">{{ params.page }}</a>{% endif %}.{% if params.email %} Reply to this email to write to {{ params.name }} directly.{% endif %}
+              </p>
+            </td>
+          </tr>
+
+        </table>
+        <!--[if mso]></td></tr></table><![endif]-->
+      </td>
+    </tr>
+  </table>
+</body>
+</html>

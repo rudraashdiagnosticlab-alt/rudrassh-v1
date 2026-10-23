@@ -12,7 +12,7 @@ export const site = {
   phone: "+91 91235 35501",
   // Assumes the main number is on WhatsApp; rudraash.com doesn't list a WhatsApp number.
   whatsapp: "919123535501", // digits only, with country code
-  email: "rudraashdiagnostics@gmail.com",
+  email: "contact@rudraash.com",
   locations: ["Dindigul", "Trichy", "Thanjavur"],
   founded: 2021,
   social: {
@@ -26,6 +26,7 @@ export type Lab = {
   city: (typeof site.locations)[number];
   address: string;
   phones: string[]; // home collection numbers
+  whatsapp: string; // gets form leads for this lab; digits only, with country code
   hours: string;
   note?: string;
 };
@@ -36,6 +37,7 @@ export const labs: Lab[] = [
     city: "Dindigul",
     address: "No. 23, Thiruvalluvar Salai, Spencer Compound, Dindigul – 624 001",
     phones: ["81221 60930", "86107 00553"],
+    whatsapp: "918122160930",
     hours: "7 am – 9 pm",
     note: `Founded in ${site.founded}`,
   },
@@ -43,12 +45,14 @@ export const labs: Lab[] = [
     city: "Trichy",
     address: "Old No. P3, New No. 23, Vivekananda Nagar, Woraiyur, Trichy – 620 003",
     phones: ["75502 69630", "91235 35501"],
+    whatsapp: "919123535501",
     hours: "Open 24 × 7",
   },
   {
     city: "Thanjavur",
     address: "Bindhu Complex, Ramakrishna Puram, Pudukottai Road, Thanjavur – 613 007",
     phones: ["99521 13825"],
+    whatsapp: "919952113825",
     hours: "7 am – 9 pm",
   },
 ];
@@ -72,7 +76,10 @@ export const mapEmbedUrl = (address: string) =>
 export const directionsUrl = (address: string) =>
   `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(address)}`;
 
-export function whatsappHref(message?: string) {
-  const base = `https://wa.me/${site.whatsapp}`;
+export function whatsappHref(message?: string, number: string = site.whatsapp) {
+  const base = `https://wa.me/${number}`;
   return message ? `${base}?text=${encodeURIComponent(message)}` : base;
 }
+
+// The WhatsApp number a form sends to for the chosen lab; the main number if none is chosen.
+export const labWhatsapp = (city: string) => labs.find((l) => l.city === city)?.whatsapp ?? site.whatsapp;

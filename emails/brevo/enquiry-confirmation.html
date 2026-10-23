@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="x-apple-disable-message-reformatting">
+  <meta name="color-scheme" content="light">
+  <meta name="supported-color-schemes" content="light">
+  <title>We've received your request</title>
+  <!--[if mso]>
+  <noscript><xml><o:OfficeDocumentSettings><o:PixelsPerInch>96</o:PixelsPerInch></o:OfficeDocumentSettings></xml></noscript>
+  <![endif]-->
+  <style>
+    body { margin: 0; padding: 0; width: 100% !important; -webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%; }
+    table, td { border-collapse: collapse; mso-table-lspace: 0pt; mso-table-rspace: 0pt; }
+    a { color: #663E98; }
+    @media only screen and (max-width: 620px) {
+      .container { width: 100% !important; }
+      .px { padding-left: 20px !important; padding-right: 20px !important; }
+      .btn-cell { display: block !important; width: 100% !important; padding: 0 0 10px 0 !important; }
+      .btn-cell table { width: 100% !important; }
+    }
+  </style>
+</head>
+<body style="margin:0;padding:0;background-color:#F1F0F5;">
+  <!-- Inbox preview text -->
+  <div style="display:none;max-height:0;overflow:hidden;opacity:0;mso-hide:all;">Thank you, {{ params.name }}. Our team will call you on +91 {{ params.phone }} to confirm.</div>
+
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" bgcolor="#F1F0F5" style="background-color:#F1F0F5;">
+    <tr>
+      <td align="center" style="padding:32px 12px;">
+        <!--[if mso]><table role="presentation" width="600" cellpadding="0" cellspacing="0" border="0"><tr><td><![endif]-->
+        <table role="presentation" class="container" width="600" cellpadding="0" cellspacing="0" border="0" style="width:600px;max-width:600px;">
+
+          <!-- Header -->
+          <tr>
+            <td class="px" bgcolor="#663E98" style="background-color:#663E98;background-image:linear-gradient(120deg,#CE158B 0%,#9A2A95 45%,#663E98 100%);border-radius:16px 16px 0 0;padding:32px;">
+              <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:16px;letter-spacing:2px;text-transform:uppercase;color:#FBD9EB;">Rudraash Diagnostics &amp; Labs</p>
+              <h1 style="margin:10px 0 0 0;font-family:Arial,Helvetica,sans-serif;font-size:26px;line-height:32px;font-weight:bold;color:#FFFFFF;">Thank you, {{ params.name }}</h1>
+              <p style="margin:8px 0 0 0;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:22px;color:#FFFFFF;">We've received your request.</p>
+            </td>
+          </tr>
+
+          <!-- Intro -->
+          <tr>
+            <td class="px" bgcolor="#FFFFFF" style="background-color:#FFFFFF;padding:28px 32px 0 32px;">
+              <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:23px;color:#373536;">
+                Our team will call you on <strong style="color:#1D1A2B;">+91 {{ params.phone }}</strong> to confirm the details. Here is what you sent us:
+              </p>
+            </td>
+          </tr>
+
+          <!-- Summary -->
+          <tr>
+            <td class="px" bgcolor="#FFFFFF" style="background-color:#FFFFFF;padding:20px 32px 0 32px;">
+              <table role="presentation" width="100%" cellpadding="0" cellspacing="0" border="0" style="border:1px solid #E4E2EA;">
+                <tr>
+                  <td width="130" valign="top" style="padding:12px 16px;background-color:#F8F6FC;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#6B6878;">Request</td>
+                  <td valign="top" style="padding:12px 16px;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:20px;font-weight:bold;color:#1D1A2B;">{{ params.form }}</td>
+                </tr>
+                {% if params.location %}
+                <tr>
+                  <td width="130" valign="top" style="padding:12px 16px;border-top:1px solid #E4E2EA;background-color:#F8F6FC;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#6B6878;">Lab</td>
+                  <td valign="top" style="padding:12px 16px;border-top:1px solid #E4E2EA;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:20px;color:#1D1A2B;">{{ params.location }}</td>
+                </tr>
+                {% endif %}
+                {% if params.package %}
+                <tr>
+                  <td width="130" valign="top" style="padding:12px 16px;border-top:1px solid #E4E2EA;background-color:#F8F6FC;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#6B6878;">Package</td>
+                  <td valign="top" style="padding:12px 16px;border-top:1px solid #E4E2EA;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:20px;color:#1D1A2B;">{{ params.package }}</td>
+                </tr>
+                {% endif %}
+                {% if params.date %}
+                <tr>
+                  <td width="130" valign="top" style="padding:12px 16px;border-top:1px solid #E4E2EA;background-color:#F8F6FC;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#6B6878;">Preferred date</td>
+                  <td valign="top" style="padding:12px 16px;border-top:1px solid #E4E2EA;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:20px;color:#1D1A2B;">{{ params.date }}</td>
+                </tr>
+                {% endif %}
+                {% if params.time %}
+                <tr>
+                  <td width="130" valign="top" style="padding:12px 16px;border-top:1px solid #E4E2EA;background-color:#F8F6FC;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#6B6878;">Preferred time</td>
+                  <td valign="top" style="padding:12px 16px;border-top:1px solid #E4E2EA;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:20px;color:#1D1A2B;">{{ params.time }}</td>
+                </tr>
+                {% endif %}
+                {% if params.purpose %}
+                <tr>
+                  <td width="130" valign="top" style="padding:12px 16px;border-top:1px solid #E4E2EA;background-color:#F8F6FC;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#6B6878;">Purpose</td>
+                  <td valign="top" style="padding:12px 16px;border-top:1px solid #E4E2EA;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:20px;color:#1D1A2B;">{{ params.purpose }}</td>
+                </tr>
+                {% endif %}
+                {% if params.message %}
+                <tr>
+                  <td width="130" valign="top" style="padding:12px 16px;border-top:1px solid #E4E2EA;background-color:#F8F6FC;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#6B6878;">Message</td>
+                  <td valign="top" style="padding:12px 16px;border-top:1px solid #E4E2EA;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:22px;color:#1D1A2B;white-space:pre-line;">{{ params.message }}</td>
+                </tr>
+                {% endif %}
+              </table>
+            </td>
+          </tr>
+
+          <!-- Need a change -->
+          <tr>
+            <td class="px" bgcolor="#FFFFFF" style="background-color:#FFFFFF;padding:28px 32px 0 32px;">
+              <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:23px;color:#373536;">Need to change something? Call or WhatsApp us, or simply reply to this email.</p>
+            </td>
+          </tr>
+          <tr>
+            <td class="px" bgcolor="#FFFFFF" style="background-color:#FFFFFF;padding:16px 32px 32px 32px;">
+              <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                <tr>
+                  <td class="btn-cell" style="padding:0 10px 0 0;">
+                    <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                      <tr>
+                        <td align="center" bgcolor="#CE158B" style="border-radius:999px;mso-padding-alt:12px 24px;">
+                          <a href="tel:+919123535501" style="display:inline-block;padding:12px 24px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:18px;font-weight:bold;color:#FFFFFF;text-decoration:none;border-radius:999px;">Call +91 91235 35501</a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                  <td class="btn-cell" style="padding:0;">
+                    <table role="presentation" cellpadding="0" cellspacing="0" border="0">
+                      <tr>
+                        <td align="center" bgcolor="#FFFFFF" style="border:2px solid #663E98;border-radius:999px;mso-padding-alt:10px 22px;">
+                          <a href="https://wa.me/919123535501" style="display:inline-block;padding:10px 22px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:18px;font-weight:bold;color:#663E98;text-decoration:none;border-radius:999px;">WhatsApp us</a>
+                        </td>
+                      </tr>
+                    </table>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+
+          <!-- Our labs -->
+          <tr>
+            <td class="px" bgcolor="#F8F6FC" style="background-color:#F8F6FC;border-top:1px solid #E4E2EA;padding:28px 32px 8px 32px;">
+              <p style="margin:0 0 16px 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:16px;letter-spacing:2px;text-transform:uppercase;font-weight:bold;color:#3C2E80;">Our labs</p>
+
+              <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:22px;font-weight:bold;color:#1D1A2B;">Dindigul <span style="font-weight:normal;color:#6B6878;font-size:13px;">&middot; 7 am &ndash; 9 pm</span></p>
+              <p style="margin:2px 0 0 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#4D4A5A;">No. 23, Thiruvalluvar Salai, Spencer Compound, Dindigul &ndash; 624 001</p>
+              <p style="margin:2px 0 20px 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#4D4A5A;">Home collection: <a href="tel:+918122160930" style="color:#663E98;text-decoration:none;">81221 60930</a>, <a href="tel:+918610700553" style="color:#663E98;text-decoration:none;">86107 00553</a></p>
+
+              <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:22px;font-weight:bold;color:#1D1A2B;">Trichy <span style="font-weight:normal;color:#6B6878;font-size:13px;">&middot; Open 24 &times; 7</span></p>
+              <p style="margin:2px 0 0 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#4D4A5A;">Old No. P3, New No. 23, Vivekananda Nagar, Woraiyur, Trichy &ndash; 620 003</p>
+              <p style="margin:2px 0 20px 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#4D4A5A;">Home collection: <a href="tel:+917550269630" style="color:#663E98;text-decoration:none;">75502 69630</a>, <a href="tel:+919123535501" style="color:#663E98;text-decoration:none;">91235 35501</a></p>
+
+              <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:22px;font-weight:bold;color:#1D1A2B;">Thanjavur <span style="font-weight:normal;color:#6B6878;font-size:13px;">&middot; 7 am &ndash; 9 pm</span></p>
+              <p style="margin:2px 0 0 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#4D4A5A;">Bindhu Complex, Ramakrishna Puram, Pudukottai Road, Thanjavur &ndash; 613 007</p>
+              <p style="margin:2px 0 20px 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#4D4A5A;">Home collection: <a href="tel:+919952113825" style="color:#663E98;text-decoration:none;">99521 13825</a></p>
+            </td>
+          </tr>
+
+          <!-- Footer -->
+          <tr>
+            <td class="px" bgcolor="#120B2E" style="background-color:#120B2E;border-radius:0 0 16px 16px;padding:24px 32px;">
+              <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:20px;font-weight:bold;color:#FFFFFF;">Rudraash Diagnostics &amp; Labs Pvt Ltd</p>
+              <p style="margin:4px 0 0 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;color:#C9C7D1;">The Diagnostic Care You Deserve, From Experts You Trust</p>
+              <p style="margin:12px 0 0 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;">
+                <a href="mailto:contact@rudraash.com" style="color:#F68CC1;text-decoration:none;">contact@rudraash.com</a>
+              </p>
+              <p style="margin:8px 0 0 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:20px;">
+                <a href="https://www.facebook.com/profile.php?id=61590859138940" style="color:#F68CC1;text-decoration:none;">Facebook</a>
+                <span style="color:#6B6878;">&nbsp;&middot;&nbsp;</span>
+                <a href="https://www.instagram.com/rudraashdiagnosticlab/" style="color:#F68CC1;text-decoration:none;">Instagram</a>
+                <span style="color:#6B6878;">&nbsp;&middot;&nbsp;</span>
+                <a href="https://www.youtube.com/@rudraashdiagnosticlab" style="color:#F68CC1;text-decoration:none;">YouTube</a>
+              </p>
+              <p style="margin:16px 0 0 0;font-family:Arial,Helvetica,sans-serif;font-size:11px;line-height:16px;color:#9A97A6;">You're getting this email because you filled in a form on our website. If that wasn't you, you can ignore it.</p>
+            </td>
+          </tr>
+
+        </table>
+        <!--[if mso]></td></tr></table><![endif]-->
+      </td>
+    </tr>
+  </table>
+</body>
+</html>
