@@ -97,6 +97,7 @@ export const serviceDetails: Record<string, ServiceDetail> = {
               "CPK / CPK-MB / LDH / Trop T",
               "Urine PCR (Protein-Creatinine Ratio)",
               "Urine ACR (Albumin-Creatinine Ratio)",
+              "Urine for Micro Albumin",
             ],
             note: "And other biochemistry tests.",
           },
@@ -114,20 +115,6 @@ export const serviceDetails: Record<string, ServiceDetail> = {
     sections: [
       {
         blocks: [
-          {
-            type: "tests",
-            title: "Our Clinical Pathology Lab Services Include",
-            tests: [
-              "Urine Routine",
-              "Urine Pregnancy Test",
-              "Urine for Micro Albumin",
-              "Stool Routine",
-              "Sputum for AFB / Routine",
-              "Fluid Exam (CSF, Pleural, Ascitic)",
-              "Semen Analysis",
-              "Tuberculin Test",
-            ],
-          },
           {
             type: "tests",
             title: "Urine",
@@ -155,6 +142,11 @@ export const serviceDetails: Record<string, ServiceDetail> = {
               "Stool H. Pylori Antigen",
               "Stool Reducing Substance",
             ],
+          },
+          {
+            type: "tests",
+            title: "Fluid Analysis",
+            tests: ["CSF Fluid Test", "Pleural Fluid Test", "Ascitic Fluid Test"],
           },
           { type: "tests", title: "Semen", tests: ["Semen Analysis"] },
         ],
@@ -349,6 +341,8 @@ export const serviceDetails: Record<string, ServiceDetail> = {
               "Culture & Sensitivity Studies",
               "Automated Microbial Culture Systems",
               "MIC Studies",
+              "Sputum for AFB / Routine",
+              "Tuberculin Test",
             ],
           },
           {
