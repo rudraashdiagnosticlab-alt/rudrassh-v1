@@ -17,6 +17,9 @@ const BOOKING_PAGES = new Set([
 export const BOOKING_FALLBACK = `/contact-us#${BOOK_SECTION_ID}`;
 export const hasBookingForm = (pathname: string) => BOOKING_PAGES.has(pathname);
 
+// The booking form's package option for anything that isn't one of the packages (e.g. a service).
+export const OTHER_PACKAGE = "Others";
+
 export type BookingRequest = { item: string; note?: string };
 
 // `item` is a package or service name; `note` (e.g. the chosen profile) goes into the message.

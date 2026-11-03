@@ -3,11 +3,11 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowRight, CircleCheck } from "lucide-react";
 import { packages } from "@/lib/data";
-import { BOOK_EVENT, type BookingRequest } from "@/lib/booking";
+import { BOOK_EVENT, OTHER_PACKAGE, type BookingRequest } from "@/lib/booking";
 import { sendEnquiry } from "@/lib/enquiry";
 import { labWhatsapp, site, whatsappHref } from "@/lib/site";
+import { SpamTrap } from "@/components/ui/SpamTrap";
 
-const OTHERS = "Others";
 const packageNames = packages.map((p) => p.name);
 
 const todayISO = () => {
@@ -26,6 +26,12 @@ export function BookingForm() {
   const nameRef = useRef<HTMLInputElement>(null);
   // The message text filled in by the last "Book" click, so the next click can replace it.
   const autoMessage = useRef("");
+  // When the form appeared; the server drops submits that come faster than a person can fill it in.
+  const shownAt = useRef(0);
+
+  useEffect(() => {
+    shownAt.current = Date.now();
+  }, []);
 
   useEffect(() => {
     const onBook = (e: Event) => {
@@ -35,7 +41,7 @@ export function BookingForm() {
       const previous = autoMessage.current;
       autoMessage.current = filled;
 
-      setPkg(isPackage ? item : OTHERS);
+      setPkg(isPackage ? item : OTHER_PACKAGE);
       // Swap out the previous click's text but keep anything the visitor typed themselves.
       setMessage((current) => {
         const own = (current.startsWith(previous) ? current.slice(previous.length) : current).trim();
@@ -67,7 +73,19 @@ export function BookingForm() {
     if (Object.keys(next).length) return;
 
     // Emailed to the lab in the background; WhatsApp still opens straight away (it must, or popup blockers stop it).
-    sendEnquiry({ form: "Appointment request", name, phone, email, location, package: pkg, date, time, message }).catch(() => {});
+    sendEnquiry({
+      form: "Appointment request",
+      name,
+      phone,
+      email,
+      location,
+      package: pkg,
+      date,
+      time,
+      message,
+      website: String(data.get("website") ?? ""),
+      elapsedMs: Date.now() - shownAt.current,
+    }).catch(() => {});
 
     const text = [
       "Hi Rudraash, I'd like to book an appointment.",
@@ -162,7 +180,7 @@ export function BookingForm() {
                 {p}
               </option>
             ))}
-            <option value={OTHERS}>{OTHERS}</option>
+            <option value={OTHER_PACKAGE}>{OTHER_PACKAGE}</option>
           </select>
         </label>
 
@@ -188,6 +206,7 @@ export function BookingForm() {
           />
         </label>
       </div>
+      <SpamTrap />
 
       <button
         type="submit"

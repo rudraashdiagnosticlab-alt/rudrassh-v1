@@ -1,10 +1,11 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ArrowRight, CircleCheck } from "lucide-react";
 import { academy } from "@/lib/data";
 import { sendEnquiry } from "@/lib/enquiry";
 import { labWhatsapp, site, whatsappHref } from "@/lib/site";
+import { SpamTrap } from "@/components/ui/SpamTrap";
 
 type Errors = Partial<Record<"name" | "phone" | "email" | "location" | "purpose", string>>;
 
@@ -12,6 +13,12 @@ type Errors = Partial<Record<"name" | "phone" | "email" | "location" | "purpose"
 export function AcademyForm() {
   const [errors, setErrors] = useState<Errors>({});
   const [sent, setSent] = useState(false);
+  // When the form appeared; the server drops submits that come faster than a person can fill it in.
+  const shownAt = useRef(0);
+
+  useEffect(() => {
+    shownAt.current = Date.now();
+  }, []);
 
   function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -32,7 +39,17 @@ export function AcademyForm() {
     setErrors(next);
     if (Object.keys(next).length) return;
 
-    sendEnquiry({ form: "Training Academy enquiry", name, phone, email, location, purpose, message }).catch(() => {});
+    sendEnquiry({
+      form: "Training Academy enquiry",
+      name,
+      phone,
+      email,
+      location,
+      purpose,
+      message,
+      website: String(data.get("website") ?? ""),
+      elapsedMs: Date.now() - shownAt.current,
+    }).catch(() => {});
 
     const text = [
       "Hi Rudraash Training Academy, I'd like to enquire.",
@@ -141,6 +158,7 @@ export function AcademyForm() {
           />
         </label>
       </div>
+      <SpamTrap />
 
       <button
         type="submit"

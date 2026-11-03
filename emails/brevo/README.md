@@ -23,7 +23,7 @@ Send these in `params`. Leave out anything the visitor didn't fill in, and the r
 | Param | Example | Sent by |
 | --- | --- | --- |
 | `form` | `Appointment request` / `Training Academy enquiry` | both forms |
-| `name` | `Priya S` | both forms |
+| `name` | `Priya S` | both forms; notification only |
 | `phone` | `9876543210` (10 digits, no +91) | both forms |
 | `email` | `priya@example.com` | both forms (optional) |
 | `location` | `Trichy` | both forms |
@@ -31,9 +31,11 @@ Send these in `params`. Leave out anything the visitor didn't fill in, and the r
 | `date` | `Tue, 20 Oct 2026` (format it before sending) | booking |
 | `time` | `10:30 am` | booking |
 | `purpose` | `Internship` | academy |
-| `message` | free text; line breaks are kept | both forms |
+| `message` | free text; line breaks are kept | both forms; notification only |
 | `page` | `https://…/contact-us` | notification only |
 | `submitted_at` | `15 Oct 2026, 4:05 pm` | notification only |
+
+The confirmation goes to whatever email address was typed into the form, so it carries no free text: no `name` or `message`, and no name on the recipient. Otherwise anyone could use the form to send a Rudraash email carrying their own words. For the same reason, `location`, `package` and `purpose` must be one of the form's options; `enquiry.ts` rejects anything else.
 
 ## Example API call
 
@@ -60,6 +62,6 @@ Send these in `params`. Leave out anything the visitor didn't fill in, and the r
 }
 ```
 
-Leave out `replyTo` when the visitor gave no email. Send the confirmation as a second call with its own `templateId`, `to` set to the visitor, and no `replyTo`.
+Leave out `replyTo` when the visitor gave no email. Send the confirmation as a second call with its own `templateId`, `to` set to the visitor's email (no name), no `replyTo`, and only the params not marked "notification only".
 
 The lab addresses, phone numbers, hours and social links in `enquiry-confirmation.html` are copied from `src/lib/site.ts`. Update both when they change.
