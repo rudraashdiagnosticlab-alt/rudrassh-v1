@@ -10,7 +10,9 @@ npm run dev      # http://localhost:3000
 npm run build && npm start   # production build
 ```
 
-Set `NEXT_PUBLIC_SITE_URL` (for example `https://www.example.com`) in production. Canonical URLs, link previews, `/sitemap.xml` and `/robots.txt` are built from it; without it they point at `localhost`.
+Canonical URLs and link previews use `https://www.rudraash.com`; set `NEXT_PUBLIC_SITE_URL` to use another address (for example a staging domain).
+
+`/robots.txt` and `/sitemap.xml` are plain files in `src/app/`. When you add, rename or remove a page, update `src/app/sitemap.xml` to match (full `https://www.rudraash.com/...` URLs, no trailing slash).
 
 ## Pages
 

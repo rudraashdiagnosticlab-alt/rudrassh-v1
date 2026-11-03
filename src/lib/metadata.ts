@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { site } from "./site";
 
-// Set NEXT_PUBLIC_SITE_URL in production; canonical URLs, link previews and the sitemap are built from it.
-export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+// The live site's address; canonical URLs and link previews are built from it. rudraash.com redirects to www.
+// NEXT_PUBLIC_SITE_URL overrides it, e.g. for a staging domain.
+export const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://www.rudraash.com";
 
 // Link-preview (Open Graph) fields shared by every page.
 export const sharedOpenGraph = {
